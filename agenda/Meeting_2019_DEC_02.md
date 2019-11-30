@@ -16,4 +16,5 @@
 | 1 | Project | What kind of project to build that facilitates learning and solves real world problems? |-|
 | 2 | Stack | Which stack best suits the project?  |-|
 | 3 | Documentation | How are we going to keep tocumentations? |-|
-| 4 | Tools | which task/story manager do we use? |-|
+| 4 | Tools | Which task/story manager do we use? Or shall we use at all? |-|
+| 5 | Git | Git branching convention including feature development, deployment, hotfix...|-|
