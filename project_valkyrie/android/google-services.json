@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "190071117765",
+    "firebase_url": "https://login-test-af5de.firebaseio.com",
+    "project_id": "login-test-af5de",
+    "storage_bucket": "login-test-af5de.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:190071117765:android:08f10ae9a572541c385dac",
+        "android_client_info": {
+          "package_name": "com.jimmyziqiangcheng.login_ui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "190071117765-jvs14raiqn7jipqa0i3luq1pssuqn6th.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiMIeoEM0i-iKJYku4J6DWt0B9CmwP7gI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "190071117765-jvs14raiqn7jipqa0i3luq1pssuqn6th.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
