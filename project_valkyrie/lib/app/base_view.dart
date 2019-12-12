@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BaseView extends StatelessWidget {
-  final _selectedIndex = 1;
+  // final _selectedIndex = 1;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
@@ -23,18 +24,15 @@ class BaseView extends StatelessWidget {
     ),
   ];
 
-  void _onItemTapped(int index) {
-    //TODO: use provider to change index and thus change the display of icons
-  }
-
   @override
   Widget build(BuildContext context) {
+    final selected = Provider.of<ValueNotifier<int>>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Base View'),
       ),
       body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+        child: _widgetOptions.elementAt(selected.value),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -64,14 +62,14 @@ class BaseView extends StatelessWidget {
             title: Text('more'),
           ),
         ],
-        currentIndex: _selectedIndex,
+        currentIndex: selected.value,
         selectedItemColor: Colors.green[800],
         selectedIconTheme:
             IconThemeData(color: Colors.green[800], opacity: 1.0, size: 25.0),
         unselectedItemColor: Colors.grey,
         unselectedIconTheme:
             IconThemeData(color: Colors.grey, opacity: 1.0, size: 25.0),
-        onTap: _onItemTapped,
+        onTap: (_index) => selected.value = _index,
       ),
     );
   }
