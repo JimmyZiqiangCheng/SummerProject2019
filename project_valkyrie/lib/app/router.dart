@@ -11,14 +11,14 @@ class Router{
     final args = settings.arguments;
     switch(settings.name){
       case '/':
-        return MaterialPageRoute(builder: (_) => Welcome());
+        return MaterialPageRoute(builder: (_) => WelcomePage());
       case '/login':
         return MaterialPageRoute(builder: (_) => LoginPage(),fullscreenDialog: true);
       case '/signup':
         return MaterialPageRoute(builder: (_) => SignUpPage(),fullscreenDialog: true);
       case '/home':
         if (args is FirebaseUser) {
-          return MaterialPageRoute(builder: (_) => Home(user:args));
+          return MaterialPageRoute(builder: (_) => HomePage(user:args));
         }
         return _errorRoute();
       default:

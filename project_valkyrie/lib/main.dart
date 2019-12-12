@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Authentication and Authorization Demo',
       theme: ThemeData(
         primarySwatch: Colors.green,
+        canvasColor: Colors.grey[50],
       ),
       initialRoute: '/',
       onGenerateRoute: Router.generateRoute,
