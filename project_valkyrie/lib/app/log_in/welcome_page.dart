@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Welcome extends StatefulWidget {
+class WelcomePage extends StatefulWidget {
   @override
   _WelcomeState createState() => _WelcomeState();
 }
 
-class _WelcomeState extends State<Welcome> {
+class _WelcomeState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
