@@ -1,116 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:project_valkyrie/common_widgets/bottom_navi.dart';
+import 'package:project_valkyrie/common_widgets/drawer.dart';
 
-class BaseView extends StatelessWidget {
-  // final _selectedIndex = 1;
+class BaseView extends StatefulWidget {
+  final Widget bodyWidget;
+  final String title;
+
+  BaseView({
+    Key key,
+    @ required this.title,
+    @ required this.bodyWidget,
+  }): super(key:key);
 
   @override
-  Widget build(BuildContext context) {
-    print('---------rebuilding-------------');
-    final selected = Provider.of<ValueNotifier<int>>(context);
+  _BaseViewState createState() => _BaseViewState();
+}
 
-    String pageTitle;
-    switch (selected.value) {
-                  case 0:
-                    pageTitle = 'Home';
-                    break;
-                  case 1:
-                    pageTitle = 'Parcel'; 
-                    break;
-                  case 2:
-                    pageTitle = 'Calendar';
-                    break;
-                  default:
-                    pageTitle = pageTitle;
-                    break;
-                }
+class _BaseViewState extends State<BaseView> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  @override
+  Widget build(BuildContext context) {
+    
     return Scaffold(
+      key: _scaffoldKey,
+      // page title
       appBar: AppBar(
-        title: Text(pageTitle),
+        title: Text(widget.title),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
-      body: Container(
-        margin: const EdgeInsets.only(top: 50.0),
-        child: CarouselSlider(
-          height: 200.0,
-          initialPage: 0,
-          autoPlay: true,
-          enlargeCenterPage: true,
-          autoPlayInterval: Duration(seconds: 3),
-          autoPlayAnimationDuration: Duration(milliseconds: 800),
-          pauseAutoPlayOnTouch: Duration(seconds: 5),
-          items: [1, 2, 3].map((i) {
-            return Builder(
-              builder: (BuildContext context) {
-                Color color;
-                switch (selected.value) {
-                  case 0:
-                    color = Colors.green[500];
-                    break;
-                  case 1:
-                    color = Colors.amber;
-                    break;
-                  case 2:
-                    color = Colors.red;
-                    break;
-                  default:
-                    color = Colors.blue;
-                    break;
-                }
-                return Container(
-                    width: MediaQuery.of(context).size.width,
-                    margin: EdgeInsets.symmetric(horizontal: 5.0),
-                    decoration: BoxDecoration(
-                      color: color,
-                    ),
-                    child: Text(
-                      'text ${selected.value}',
-                      style: TextStyle(fontSize: 16.0),
-                    ));
-              },
-            );
-          }).toList(),
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-            ),
-            title: Text('Home'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.markunread,
-            ),
-            title: Text('Parcel'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.calendar_today,
-            ),
-            title: Text('Calender'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.menu,
-            ),
-            title: Text('more'),
-          ),
-        ],
-        currentIndex: selected.value,
-        selectedItemColor: Colors.green[800],
-        selectedIconTheme:
-            IconThemeData(color: Colors.green[800], opacity: 1.0, size: 25.0),
-        unselectedItemColor: Colors.grey,
-        unselectedIconTheme:
-            IconThemeData(color: Colors.grey, opacity: 1.0, size: 25.0),
-        onTap: (_index) => _index != 3 ? selected.value = _index : null,
-      ),
+      // body, main contents
+      body: widget.bodyWidget,
+      // bottom navigation bar with pop-up menu
+      bottomNavigationBar: BottomNavi(scaffoldKey: _scaffoldKey),
+
+      drawer: MyDrawer(),
     );
   }
 }
