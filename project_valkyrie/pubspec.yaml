@@ -31,6 +31,8 @@ dependencies:
   firebase_auth: ^0.15.1
   # String validator and Sanitizers
   validators: ^2.0.0
+  # A calendar library
+  table_calendar: ^2.2.1
 
 dev_dependencies:
   flutter_test:
