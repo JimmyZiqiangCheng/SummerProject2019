@@ -81,7 +81,7 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
         children: <Widget>[
           // Switch out 2 lines below to play with TableCalendar's settings
           //-----------------------
-          _buildTableCalendar(),
+          _buildTableCalendarWithBuilders(),
           // _buildTableCalendarWithBuilders(),
           const SizedBox(height: 8.0),
           _buildButtons(),
@@ -99,15 +99,15 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
       holidays: _holidays,
       startingDayOfWeek: StartingDayOfWeek.monday,
       calendarStyle: CalendarStyle(
-        selectedColor: Colors.deepOrange[400],
-        todayColor: Colors.deepOrange[200],
-        markersColor: Colors.brown[700],
+        selectedColor: Colors.green[700],
+        todayColor: Colors.green[500],
+        markersColor: Colors.green[800],
         outsideDaysVisible: false,
       ),
       headerStyle: HeaderStyle(
         formatButtonTextStyle: TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
         formatButtonDecoration: BoxDecoration(
-          color: Colors.deepOrange[400],
+          color: Colors.green[700],
           borderRadius: BorderRadius.circular(16.0),
         ),
       ),
@@ -119,7 +119,7 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
   // More advanced TableCalendar configuration (using Builders & Styles)
   Widget _buildTableCalendarWithBuilders() {
     return TableCalendar(
-      locale: 'pl_PL',
+      locale: 'en_US',
       calendarController: _calendarController,
       events: _events,
       holidays: _holidays,
@@ -133,11 +133,11 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
       },
       calendarStyle: CalendarStyle(
         outsideDaysVisible: false,
-        weekendStyle: TextStyle().copyWith(color: Colors.blue[800]),
-        holidayStyle: TextStyle().copyWith(color: Colors.blue[800]),
+        weekendStyle: TextStyle().copyWith(color: Colors.green[600]),
+        holidayStyle: TextStyle().copyWith(color: Colors.green[600]),
       ),
       daysOfWeekStyle: DaysOfWeekStyle(
-        weekendStyle: TextStyle().copyWith(color: Colors.blue[600]),
+        weekendStyle: TextStyle().copyWith(color: Colors.green[600]),
       ),
       headerStyle: HeaderStyle(
         centerHeaderTitle: true,
@@ -150,7 +150,7 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
             child: Container(
               margin: const EdgeInsets.all(4.0),
               padding: const EdgeInsets.only(top: 5.0, left: 6.0),
-              color: Colors.deepOrange[300],
+              color: Colors.green[500],
               width: 100,
               height: 100,
               child: Text(
@@ -164,7 +164,7 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
           return Container(
             margin: const EdgeInsets.all(4.0),
             padding: const EdgeInsets.only(top: 5.0, left: 6.0),
-            color: Colors.amber[400],
+            color: Colors.green[400],
             width: 100,
             height: 100,
             child: Text(
