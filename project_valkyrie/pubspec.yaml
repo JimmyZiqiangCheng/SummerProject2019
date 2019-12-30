@@ -14,25 +14,38 @@ description: An app for accomendation management and services
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-
-  # carousel slider showcase used in home page
-  carousel_slider: ^1.3.1
-  # provider used for state management
-  provider: ^3.2.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
-  # fire base authentication
-  firebase_auth: ^0.15.1
+  # provider used for state management
+  provider: ^3.2.0
   # String validator and Sanitizers
   validators: ^2.0.0
+  # carousel slider showcase used in home page
+  carousel_slider: ^1.3.1
   # A calendar library
   table_calendar: ^2.2.1
+  # Image Place Holder
+  transparent_image: ^1.0.0
+  # badge for notification icon
+  badges: ^1.1.0
+
+  # --- START Firebase Services ---
+  # Add the dependency for the Firebase Core Flutter SDK
+  firebase_core: ^0.4.3
+
+  # Add the dependency for the FlutterFire plugin for Google Analytics
+  firebase_analytics: ^5.0.9
+  # Add the dependencies for any other Firebase products you want to use in your app
+  # For example, to use Firebase Authentication and Cloud Firestore
+  firebase_auth: ^0.15.3
+  firebase_database: ^3.1.1
+  cloud_firestore: ^0.13.0
 
 dev_dependencies:
   flutter_test:

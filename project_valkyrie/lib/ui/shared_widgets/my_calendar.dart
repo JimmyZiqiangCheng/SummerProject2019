@@ -9,13 +9,14 @@ class Calendar extends StatefulWidget {
 }
 
 class CalendarState extends State<Calendar> with TickerProviderStateMixin{
-  final Map<DateTime, List> _holidays = {
-    DateTime(2019, 1, 1): ['New Year\'s Day'],
-    DateTime(2019, 1, 6): ['Epiphany'],
-    DateTime(2019, 2, 14): ['Valentine\'s Day'],
-    DateTime(2019, 4, 21): ['Easter Sunday'],
-    DateTime(2019, 4, 22): ['Easter Monday'],
-  };
+  // final Map<DateTime, List> _holidays = {
+  //   DateTime(2019, 1, 1): ['New Year\'s Day'],
+  //   DateTime(2019, 1, 6): ['Epiphany'],
+  //   DateTime(2019, 2, 14): ['Valentine\'s Day'],
+  //   DateTime(2019, 4, 21): ['Easter Sunday'],
+  //   DateTime(2019, 4, 22): ['Easter Monday'],
+  //   DateTime(2019, 12, 25): ['Christmas'],
+  // };
 
   Map<DateTime, List> _events;
   List _selectedEvents;
@@ -79,41 +80,18 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
     return Column(
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
+          
           // Switch out 2 lines below to play with TableCalendar's settings
           //-----------------------
           _buildTableCalendarWithBuilders(),
           // _buildTableCalendarWithBuilders(),
           const SizedBox(height: 8.0),
-          _buildButtons(),
+         
+          //_buildButtons(),
           const SizedBox(height: 8.0),
           Expanded(child: _buildEventList()),
         ],
       );
-  }
-
-  // Simple TableCalendar configuration (using Styles)
-  Widget _buildTableCalendar() {
-    return TableCalendar(
-      calendarController: _calendarController,
-      events: _events,
-      holidays: _holidays,
-      startingDayOfWeek: StartingDayOfWeek.monday,
-      calendarStyle: CalendarStyle(
-        selectedColor: Colors.green[700],
-        todayColor: Colors.green[500],
-        markersColor: Colors.green[800],
-        outsideDaysVisible: false,
-      ),
-      headerStyle: HeaderStyle(
-        formatButtonTextStyle: TextStyle().copyWith(color: Colors.white, fontSize: 15.0),
-        formatButtonDecoration: BoxDecoration(
-          color: Colors.green[700],
-          borderRadius: BorderRadius.circular(16.0),
-        ),
-      ),
-      onDaySelected: _onDaySelected,
-      onVisibleDaysChanged: _onVisibleDaysChanged,
-    );
   }
 
   // More advanced TableCalendar configuration (using Builders & Styles)
@@ -122,7 +100,7 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
       locale: 'en_US',
       calendarController: _calendarController,
       events: _events,
-      holidays: _holidays,
+      //holidays: _holidays,
       initialCalendarFormat: CalendarFormat.month,
       formatAnimation: FormatAnimation.slide,
       startingDayOfWeek: StartingDayOfWeek.sunday,
@@ -133,11 +111,11 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
       },
       calendarStyle: CalendarStyle(
         outsideDaysVisible: false,
-        weekendStyle: TextStyle().copyWith(color: Colors.green[600]),
-        holidayStyle: TextStyle().copyWith(color: Colors.green[600]),
+        weekendStyle: TextStyle().copyWith(color: Colors.red),
+        holidayStyle: TextStyle().copyWith(color: Colors.red),
       ),
       daysOfWeekStyle: DaysOfWeekStyle(
-        weekendStyle: TextStyle().copyWith(color: Colors.green[600]),
+        weekendStyle: TextStyle().copyWith(color: Colors.red),
       ),
       headerStyle: HeaderStyle(
         centerHeaderTitle: true,
@@ -150,12 +128,12 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
             child: Container(
               margin: const EdgeInsets.all(4.0),
               padding: const EdgeInsets.only(top: 5.0, left: 6.0),
-              color: Colors.green[500],
+              color: Theme.of(context).primaryColorDark,
               width: 100,
               height: 100,
               child: Text(
                 '${date.day}',
-                style: TextStyle().copyWith(fontSize: 16.0),
+                style: TextStyle().copyWith(color: Colors.white, fontSize: 16.0),
               ),
             ),
           );
@@ -164,7 +142,12 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
           return Container(
             margin: const EdgeInsets.all(4.0),
             padding: const EdgeInsets.only(top: 5.0, left: 6.0),
-            color: Colors.green[400],
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Theme.of(context).primaryColorDark
+              )
+            ),
+            //color: Colors.green[500],
             width: 100,
             height: 100,
             child: Text(
@@ -214,7 +197,7 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
         shape: BoxShape.rectangle,
         color: _calendarController.isSelected(date)
             ? Colors.brown[500]
-            : _calendarController.isToday(date) ? Colors.brown[300] : Colors.blue[400],
+            : _calendarController.isToday(date) ? Theme.of(context).primaryColorDark : Theme.of(context).primaryColor,
       ),
       width: 16.0,
       height: 16.0,
@@ -238,66 +221,32 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
     );
   }
 
-  Widget _buildButtons() {
-    final dateTime = _events.keys.elementAt(_events.length - 2);
-
-    return Column(
-      children: <Widget>[
-        Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            RaisedButton(
-              child: Text('Month'),
-              onPressed: () {
-                setState(() {
-                  _calendarController.setCalendarFormat(CalendarFormat.month);
-                });
-              },
-            ),
-            RaisedButton(
-              child: Text('2 weeks'),
-              onPressed: () {
-                setState(() {
-                  _calendarController.setCalendarFormat(CalendarFormat.twoWeeks);
-                });
-              },
-            ),
-            RaisedButton(
-              child: Text('Week'),
-              onPressed: () {
-                setState(() {
-                  _calendarController.setCalendarFormat(CalendarFormat.week);
-                });
-              },
-            ),
-          ],
-        ),
-        const SizedBox(height: 8.0),
-        RaisedButton(
-          child: Text('Set day ${dateTime.day}-${dateTime.month}-${dateTime.year}'),
-          onPressed: () {
-            _calendarController.setSelectedDay(
-              DateTime(dateTime.year, dateTime.month, dateTime.day),
-              runCallback: true,
-            );
-          },
-        ),
-      ],
-    );
-  }
-
   Widget _buildEventList() {
     return ListView(
       children: _selectedEvents
           .map((event) => Container(
                 decoration: BoxDecoration(
-                  border: Border.all(width: 0.8),
-                  borderRadius: BorderRadius.circular(12.0),
+                  color: Colors.white,
+                  //border: Border.all(width: 0.8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey[400],
+                      blurRadius: 3.0,
+                      spreadRadius: 1.0,
+                      offset: Offset(
+                        3.0, // horizontal, move right
+                        3.0, // vertical, move down
+                      ),
+                    )
+                  ]
                 ),
                 margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
                 child: ListTile(
                   title: Text(event.toString()),
+                  trailing: Icon(
+                    Icons.favorite_border,
+                    color: Theme.of(context).primaryColorDark,
+                  ),
                   onTap: () => print('$event tapped!'),
                 ),
               ))
