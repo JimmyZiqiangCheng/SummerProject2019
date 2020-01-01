@@ -34,7 +34,7 @@ class WelcomeView extends StatelessWidget {
                 Text(
                   _txtWelcome,
                   textAlign: TextAlign.center,
-                  style: TextStyles.titleStyleLight
+                  style: TextStyles.titleStyleLight,
                 ),
                 Text(
                   _txtLogo,
