@@ -37,7 +37,7 @@ dependencies:
 
   # --- START Firebase Services ---
   # Add the dependency for the Firebase Core Flutter SDK
-  firebase_core: ^0.4.3
+  firebase_core: ^0.4.3+1
 
   # Add the dependency for the FlutterFire plugin for Google Analytics
   firebase_analytics: ^5.0.9
@@ -45,7 +45,8 @@ dependencies:
   # For example, to use Firebase Authentication and Cloud Firestore
   firebase_auth: ^0.15.3
   firebase_database: ^3.1.1
-  cloud_firestore: ^0.13.0
+  cloud_firestore: ^0.13.0+1
+  firebase_messaging: ^6.0.9
 
 dev_dependencies:
   flutter_test:
@@ -63,7 +64,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+    - assets/icons/
   #  - images/a_dot_burr.jpeg
   #  - images/a_dot_ham.jpeg
 
