@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_valkyrie/ui/styles/app_colors.dart';
 import 'package:project_valkyrie/ui/styles/ui_helper.dart';
 
+
 class AuthenticationBaseView extends StatefulWidget {
   final Widget contentWidget;
   final void Function() dismissActionOnPressed;

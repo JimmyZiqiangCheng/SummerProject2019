@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_valkyrie/ui/styles/app_colors.dart';
 
+
 class TextStyles {
   static const double _textHeadingSize1 = 64.0;
   static const double _textHeadingSize2 = 48.0;
@@ -18,11 +19,11 @@ class TextStyles {
     fontSize: _textHeadingSize3,
     fontWeight: FontWeight.bold,
   );
-  static const subHeaderStyle = TextStyle(
+  static subHeaderStyle({Color color : Colors.grey}) { return TextStyle(
     fontSize: _textSize,
     fontWeight: FontWeight.w500,
-    color: Colors.grey
-  );
+    color: color);
+  }
 
   static const heading1Style = TextStyle(
     fontWeight: FontWeight.w700,
@@ -80,6 +81,13 @@ class TextStyles {
   static const textButtonStyle = TextStyle(
       fontSize: _textSize,
       color: AppColors.primaryDark,
+      fontStyle: FontStyle.normal,
+      decoration: TextDecoration.underline);
+
+    static final textButtonStyleInDialog = TextStyle(
+      fontSize: _buttonTextSize,
+      //fontWeight: FontWeight.bold,
+      color: AppColors.buttonTextInDialog,
       fontStyle: FontStyle.normal,
       decoration: TextDecoration.underline);
 }

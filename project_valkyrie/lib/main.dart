@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:project_valkyrie/providers.dart';
 import 'package:project_valkyrie/ui/router.dart';
 import 'package:project_valkyrie/ui/styles/app_colors.dart';
-import 'package:provider/provider.dart';
-
 
 
 import 'core/constants/app_constants.dart';

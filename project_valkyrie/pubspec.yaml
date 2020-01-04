@@ -34,10 +34,12 @@ dependencies:
   transparent_image: ^1.0.0
   # badge for notification icon
   badges: ^1.1.0
+  # a qr code generator for flutter
+  qr_flutter: ^3.2.0
 
   # --- START Firebase Services ---
   # Add the dependency for the Firebase Core Flutter SDK
-  firebase_core: ^0.4.3+1
+  firebase_core: ^0.4.3
 
   # Add the dependency for the FlutterFire plugin for Google Analytics
   firebase_analytics: ^5.0.9
@@ -45,8 +47,7 @@ dependencies:
   # For example, to use Firebase Authentication and Cloud Firestore
   firebase_auth: ^0.15.3
   firebase_database: ^3.1.1
-  cloud_firestore: ^0.13.0+1
-  firebase_messaging: ^6.0.9
+  cloud_firestore: ^0.13.0
 
 dev_dependencies:
   flutter_test:

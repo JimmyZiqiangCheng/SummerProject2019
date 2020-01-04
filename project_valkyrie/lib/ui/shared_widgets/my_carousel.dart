@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:project_valkyrie/ui/styles/text_styles.dart';
+import 'package:project_valkyrie/ui/styles/ui_helper.dart';
 
 class Carousel extends StatelessWidget {
   @override
@@ -8,6 +10,7 @@ class Carousel extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(top: 50.0),
       child: CarouselSlider(
+        viewportFraction: 0.9,
         height: 400.0,
         initialPage: 0,
         autoPlay: true,
@@ -22,22 +25,32 @@ class Carousel extends StatelessWidget {
                 children: <Widget>[
                   Card(
                     //color: Colors.blueGrey[200],
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(UIHelper.circularAngle)),
                     child: Container(
-                      margin: const EdgeInsets.all(4.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(UIHelper.circularAngle),
+                        boxShadow:[UIHelper.customBoxShadow],
+                      ),
                       height: 250,
                       width: MediaQuery.of(context).size.width,
-                      child: FadeInImage.memoryNetwork(
-                        placeholder: kTransparentImage,
-                        image: 'https://picsum.photos/300?image=${i + 99}',
-                        fit: BoxFit.fill,
+                      child: ClipRRect(
+                        borderRadius: new BorderRadius.circular(UIHelper.circularAngle),
+                        child: FadeInImage.memoryNetwork(
+                          placeholder: kTransparentImage,
+                          image: 'https://picsum.photos/300?image=${i + 99}',
+                          fit: BoxFit.fill,
+                        ),
                       ),
                     ),
                   ),
+                  UIHelper.verticalSpaceLarge,
                   Container(
                     child: Text(
                       'Event: $i',
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                          TextStyles.subHeaderStyle(),
                     ),
                   ),
                 ],

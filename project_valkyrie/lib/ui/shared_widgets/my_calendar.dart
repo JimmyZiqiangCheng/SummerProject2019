@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:project_valkyrie/core/constants/app_constants.dart';
+import 'package:project_valkyrie/ui/shared_widgets/my_item_list.dart';
+import 'package:project_valkyrie/ui/styles/app_colors.dart';
 
 class Calendar extends StatefulWidget {
   Calendar({Key key, this.title}) : super(key: key);
@@ -9,15 +12,6 @@ class Calendar extends StatefulWidget {
 }
 
 class CalendarState extends State<Calendar> with TickerProviderStateMixin{
-  // final Map<DateTime, List> _holidays = {
-  //   DateTime(2019, 1, 1): ['New Year\'s Day'],
-  //   DateTime(2019, 1, 6): ['Epiphany'],
-  //   DateTime(2019, 2, 14): ['Valentine\'s Day'],
-  //   DateTime(2019, 4, 21): ['Easter Sunday'],
-  //   DateTime(2019, 4, 22): ['Easter Monday'],
-  //   DateTime(2019, 12, 25): ['Christmas'],
-  // };
-
   Map<DateTime, List> _events;
   List _selectedEvents;
   AnimationController _animationController;
@@ -77,21 +71,11 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          
-          // Switch out 2 lines below to play with TableCalendar's settings
-          //-----------------------
-          _buildTableCalendarWithBuilders(),
-          // _buildTableCalendarWithBuilders(),
-          const SizedBox(height: 8.0),
-         
-          //_buildButtons(),
-          const SizedBox(height: 8.0),
-          Expanded(child: _buildEventList()),
-        ],
-      );
+    return MyItemList(
+      option: ListOptions.eventList,
+      dataMap: _selectedEvents,
+      additionalTopWidget: _buildTableCalendarWithBuilders(),
+    );
   }
 
   // More advanced TableCalendar configuration (using Builders & Styles)
@@ -196,7 +180,7 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         color: _calendarController.isSelected(date)
-            ? Colors.brown[500]
+            ? AppColors.primaryContrast
             : _calendarController.isToday(date) ? Theme.of(context).primaryColorDark : Theme.of(context).primaryColor,
       ),
       width: 16.0,
@@ -218,39 +202,6 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
       Icons.add_box,
       size: 20.0,
       color: Colors.blueGrey[800],
-    );
-  }
-
-  Widget _buildEventList() {
-    return ListView(
-      children: _selectedEvents
-          .map((event) => Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  //border: Border.all(width: 0.8),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey[400],
-                      blurRadius: 3.0,
-                      spreadRadius: 1.0,
-                      offset: Offset(
-                        3.0, // horizontal, move right
-                        3.0, // vertical, move down
-                      ),
-                    )
-                  ]
-                ),
-                margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                child: ListTile(
-                  title: Text(event.toString()),
-                  trailing: Icon(
-                    Icons.favorite_border,
-                    color: Theme.of(context).primaryColorDark,
-                  ),
-                  onTap: () => print('$event tapped!'),
-                ),
-              ))
-          .toList(),
     );
   }
 }

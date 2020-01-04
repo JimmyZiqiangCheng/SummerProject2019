@@ -11,6 +11,10 @@ class AppColors {
 // Flat Button Color - inactive
   static const Color flatButtonInactiveBackground = primaryTint;
   static const Color flatButtonInatviceText = primaryDark;
+// shadow color
+  static const Color shadowColor = Colors.grey;
+// constrast color
+  static const Color primaryContrast = Colors.brown;
 
   static const Color accentColor = primaryDark;
   static const MaterialColor primaryColor = MaterialColor(
@@ -24,4 +28,6 @@ class AppColors {
     },
   );
   static const int _primaryColor = 0xFFA8C3C0;
+
+  static final Color buttonTextInDialog = Colors.grey[700];
 }

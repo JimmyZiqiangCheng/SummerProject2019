@@ -1,5 +1,7 @@
 import 'dart:math';
+
 import 'package:project_valkyrie/core/data_models/user.dart';
+
 
 class FirebaseApi {
   Future<User> loginWithEmailAndpassword(String email, String password) async {
