@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_valkyrie/core/services/authentication_service.dart';
 import 'package:project_valkyrie/core/view_models/base_view_model.dart';
 
+
 class SignUpViewModel extends BaseViewModel {
   AuthenticationService _authenService;
 

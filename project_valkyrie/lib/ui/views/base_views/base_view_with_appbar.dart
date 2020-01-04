@@ -1,10 +1,11 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+
+import 'package:provider/provider.dart';
 import 'package:project_valkyrie/core/constants/app_constants.dart';
 import 'package:project_valkyrie/core/services/notification_service.dart';
 import 'package:project_valkyrie/ui/shared_widgets/my_bottom_navigation_bar.dart';
 import 'package:project_valkyrie/ui/shared_widgets/my_drawer.dart';
-import 'package:provider/provider.dart';
 
 class BaseViewWithAppBar<T extends ChangeNotifier> extends StatefulWidget {
   final String routePath;
@@ -63,13 +64,17 @@ class _BaseViewWithAppBarState<T extends ChangeNotifier> extends State<BaseViewW
   String getTitle(String routePath) {
     switch (routePath) {
       case RoutePaths.home:
-        return 'Home Sample';
+        return 'Home';
       case RoutePaths.parcel:
-        return 'Parcel Sample ';
+        return 'Parcel';
       case RoutePaths.calendar:
-        return 'Calendar Sample';
+        return 'Calendar';
       case RoutePaths.lostKeys:
-        return 'Lost Key Sample';
+        return 'Lost Keys';
+      case RoutePaths.maintenance:
+        return 'Maintenance';
+      case RoutePaths.rent:
+        return 'Rent';
       default:
         return 'Unknown';
     }

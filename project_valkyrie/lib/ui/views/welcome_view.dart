@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_valkyrie/core/constants/app_constants.dart';
 import 'package:project_valkyrie/ui/shared_widgets/my_flat_button.dart';
-import 'package:project_valkyrie/ui/styles/text_styles.dart';
 import 'package:project_valkyrie/ui/styles/ui_helper.dart';
+import 'package:project_valkyrie/ui/styles/text_styles.dart';
 
 class WelcomeView extends StatelessWidget {
   final String _txtWelcome = 'Welcome to';
@@ -56,7 +56,7 @@ class WelcomeView extends StatelessWidget {
                 Text(
                   _txtSologan,
                   textAlign: TextAlign.center,
-                  style: TextStyles.subHeaderStyle,
+                  style: TextStyles.subHeaderStyle(),
                 ),
                 UIHelper.verticalSpaceLarge,
                 MyFlatButton(

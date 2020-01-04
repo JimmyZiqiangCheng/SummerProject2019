@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:project_valkyrie/core/constants/app_constants.dart';
 import 'package:project_valkyrie/ui/views/base_views/base_view_with_appbar.dart';
 
+
 class RentView extends StatelessWidget {
   const RentView({Key key}) : super(key: key);
 

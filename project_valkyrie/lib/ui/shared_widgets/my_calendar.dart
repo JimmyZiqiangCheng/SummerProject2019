@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:project_valkyrie/core/constants/app_constants.dart';
+import 'package:project_valkyrie/ui/shared_widgets/my_item_list.dart';
+import 'package:project_valkyrie/ui/styles/app_colors.dart';
 
 class Calendar extends StatefulWidget {
   Calendar({Key key, this.title}) : super(key: key);
@@ -9,15 +12,6 @@ class Calendar extends StatefulWidget {
 }
 
 class CalendarState extends State<Calendar> with TickerProviderStateMixin{
-  // final Map<DateTime, List> _holidays = {
-  //   DateTime(2019, 1, 1): ['New Year\'s Day'],
-  //   DateTime(2019, 1, 6): ['Epiphany'],
-  //   DateTime(2019, 2, 14): ['Valentine\'s Day'],
-  //   DateTime(2019, 4, 21): ['Easter Sunday'],
-  //   DateTime(2019, 4, 22): ['Easter Monday'],
-  //   DateTime(2019, 12, 25): ['Christmas'],
-  // };
-
   Map<DateTime, List> _events;
   List _selectedEvents;
   AnimationController _animationController;
@@ -28,11 +22,8 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
     super.initState();
     final _selectedDay = DateTime.now();
 
+    // only show events within a certain range from the current date
     _events = {
-      _selectedDay.subtract(Duration(days: 30)): ['Event A0', 'Event B0', 'Event C0'],
-      _selectedDay.subtract(Duration(days: 27)): ['Event A1'],
-      _selectedDay.subtract(Duration(days: 20)): ['Event A2', 'Event B2', 'Event C2', 'Event D2'],
-      _selectedDay.subtract(Duration(days: 16)): ['Event A3', 'Event B3'],
       _selectedDay.subtract(Duration(days: 10)): ['Event A4', 'Event B4', 'Event C4'],
       _selectedDay.subtract(Duration(days: 4)): ['Event A5', 'Event B5', 'Event C5'],
       _selectedDay.subtract(Duration(days: 2)): ['Event A6', 'Event B6'],
@@ -40,12 +31,9 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
       _selectedDay.add(Duration(days: 1)): ['Event A8', 'Event B8', 'Event C8', 'Event D8'],
       _selectedDay.add(Duration(days: 3)): Set.from(['Event A9', 'Event A9', 'Event B9']).toList(),
       _selectedDay.add(Duration(days: 7)): ['Event A10', 'Event B10', 'Event C10'],
-      _selectedDay.add(Duration(days: 11)): ['Event A11', 'Event B11'],
-      _selectedDay.add(Duration(days: 17)): ['Event A12', 'Event B12', 'Event C12', 'Event D12'],
-      _selectedDay.add(Duration(days: 22)): ['Event A13', 'Event B13'],
-      _selectedDay.add(Duration(days: 26)): ['Event A14', 'Event B14', 'Event C14'],
     };
 
+    //_selectedEvents = _events[_selectedDay] ?? [];
     _selectedEvents = _events[_selectedDay] ?? [];
     _calendarController = CalendarController();
 
@@ -65,33 +53,23 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
   }
 
   void _onDaySelected(DateTime day, List events) {
-    print('CALLBACK: _onDaySelected');
+    //print('CALLBACK: _onDaySelected');
     setState(() {
       _selectedEvents = events;
     });
   }
 
   void _onVisibleDaysChanged(DateTime first, DateTime last, CalendarFormat format) {
-    print('CALLBACK: _onVisibleDaysChanged');
+    //print('CALLBACK: _onVisibleDaysChanged');
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget>[
-          
-          // Switch out 2 lines below to play with TableCalendar's settings
-          //-----------------------
-          _buildTableCalendarWithBuilders(),
-          // _buildTableCalendarWithBuilders(),
-          const SizedBox(height: 8.0),
-         
-          //_buildButtons(),
-          const SizedBox(height: 8.0),
-          Expanded(child: _buildEventList()),
-        ],
-      );
+    return MyItemList(
+      option: ListOptions.eventList,
+      dataMap: _selectedEvents,
+      additionalTopWidget: _buildTableCalendarWithBuilders(),
+    );
   }
 
   // More advanced TableCalendar configuration (using Builders & Styles)
@@ -107,15 +85,11 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
       availableGestures: AvailableGestures.all,
       availableCalendarFormats: const {
         CalendarFormat.month: '',
-        CalendarFormat.week: '',
       },
       calendarStyle: CalendarStyle(
         outsideDaysVisible: false,
-        weekendStyle: TextStyle().copyWith(color: Colors.red),
-        holidayStyle: TextStyle().copyWith(color: Colors.red),
       ),
       daysOfWeekStyle: DaysOfWeekStyle(
-        weekendStyle: TextStyle().copyWith(color: Colors.red),
       ),
       headerStyle: HeaderStyle(
         centerHeaderTitle: true,
@@ -196,7 +170,7 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         color: _calendarController.isSelected(date)
-            ? Colors.brown[500]
+            ? AppColors.primaryContrast
             : _calendarController.isToday(date) ? Theme.of(context).primaryColorDark : Theme.of(context).primaryColor,
       ),
       width: 16.0,
@@ -218,39 +192,6 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
       Icons.add_box,
       size: 20.0,
       color: Colors.blueGrey[800],
-    );
-  }
-
-  Widget _buildEventList() {
-    return ListView(
-      children: _selectedEvents
-          .map((event) => Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  //border: Border.all(width: 0.8),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey[400],
-                      blurRadius: 3.0,
-                      spreadRadius: 1.0,
-                      offset: Offset(
-                        3.0, // horizontal, move right
-                        3.0, // vertical, move down
-                      ),
-                    )
-                  ]
-                ),
-                margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-                child: ListTile(
-                  title: Text(event.toString()),
-                  trailing: Icon(
-                    Icons.favorite_border,
-                    color: Theme.of(context).primaryColorDark,
-                  ),
-                  onTap: () => print('$event tapped!'),
-                ),
-              ))
-          .toList(),
     );
   }
 }

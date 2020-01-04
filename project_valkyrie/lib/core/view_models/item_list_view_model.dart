@@ -2,7 +2,7 @@
 import 'package:project_valkyrie/core/view_models/base_view_model.dart';
 
 class ItemListViewModel extends BaseViewModel {
-  List<String> collected = new List<String>();
+  List<String> collection = new List<String>();
   
   ItemListViewModel() {
     initItem();
@@ -13,16 +13,16 @@ class ItemListViewModel extends BaseViewModel {
   }
 
   void addItem(item) {
-    collected.add(item);
+    collection.add(item);
     notifyListeners();
   }
 
   void removeItem(item) {
-    collected.remove(item);
+    collection.remove(item);
     notifyListeners();
   }
 
   bool containsItem(item) {
-    return collected.contains(item);
+    return collection.contains(item);
   }
 }

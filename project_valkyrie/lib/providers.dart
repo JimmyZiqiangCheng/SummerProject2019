@@ -1,9 +1,9 @@
 import 'dart:core';
+import 'package:provider/provider.dart';
 import 'package:project_valkyrie/core/data_models/user.dart';
 import 'package:project_valkyrie/core/services/authentication_service.dart';
 import 'package:project_valkyrie/core/services/firebase_api.dart';
 import 'package:project_valkyrie/core/services/notification_service.dart';
-import 'package:provider/provider.dart';
 
 List<SingleChildCloneableWidget> appProviders = [
   ...independentServices,

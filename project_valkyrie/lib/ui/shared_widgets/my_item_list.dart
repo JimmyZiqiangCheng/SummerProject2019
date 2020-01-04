@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:project_valkyrie/core/constants/app_constants.dart';
 import 'package:project_valkyrie/core/view_models/item_list_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:project_valkyrie/ui/styles/ui_helper.dart';
 
 class MyItemList <T extends ChangeNotifier>  extends StatefulWidget {
-  final int listOption;
+  final int option;
   final dataMap;
-  final T model;
-  MyItemList({@required this.listOption, @required this.dataMap, this.model});
+  final Widget additionalTopWidget;
+  final void Function(BuildContext context, ItemListViewModel list, String tapKey) onTapTile;
+  MyItemList({Key key, @required this.option, @required this.dataMap, this.additionalTopWidget, this.onTapTile}) 
+    : super(key: key);
 
   @override
   _MyItemListState createState() => _MyItemListState();
@@ -20,79 +23,50 @@ class _MyItemListState extends State<MyItemList> {
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
         // add a bar if it is lostKeys view
-        if (widget.listOption == ListOptions.lostKeysList) ...[
-          const SizedBox(height: 8.0),
-          _buildAddItem(),
+        if (widget.additionalTopWidget != null) ...[
+          UIHelper.verticalSpaceSmall,
+          widget.additionalTopWidget,
         ],
-        const SizedBox(height: 8.0),
-        const SizedBox(height: 8.0),
+        UIHelper.verticalSpaceMedium,
         Expanded(child: _buildItemList(context)),
       ],
     );
   }
 
-  Widget _buildAddItem() {
-    return Container(
-      alignment: Alignment.topCenter,
-      decoration: BoxDecoration(color: Colors.white, boxShadow: [
-        BoxShadow(
-          color: Colors.grey[400],
-          blurRadius: 3.0,
-          spreadRadius: 1.0,
-          offset: Offset(3.0, 3.0),
-        )
-      ]),
-      margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
-      child: ListTile(
-          title: Text(
-            "New",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-          trailing: Icon(Icons.add),
-          onTap: () {}),
-    );
-  }
-
   Widget _buildItemList(context) {
-    final collection = Provider.of<ItemListViewModel>(context);
+    final storedList = Provider.of<ItemListViewModel>(context);
     return ListView.builder(
         itemCount: widget.dataMap.length,
         itemBuilder: (BuildContext context, int index) {
-          String key = widget.dataMap.keys.elementAt(index);
-          return Container(
+          // if it is events, it is not key value pair but a list
+          String key;
+          widget.option == ListOptions.eventList ? key = widget.dataMap[index]
+            :key = widget.dataMap.keys.elementAt(index);
+          
+          return Container( 
             alignment: Alignment.topCenter,
             decoration: BoxDecoration(color: Colors.white, boxShadow: [
-              BoxShadow(
-                color: Colors.grey[400],
-                blurRadius: 3.0,
-                spreadRadius: 1.0,
-                offset: Offset(3.0, 3.0),
-              )
+              UIHelper.customBoxShadow,
             ]),
             margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
             child: ListTile(
-                title: Text(
-                  key,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: collection.containsItem(key)
-                        ? Colors.grey[300]
-                        : Colors.black,
-                    decoration: collection.containsItem(key)
-                        ? TextDecoration.lineThrough
-                        : null,
-                  ),
-                ),
-                trailing: Icon(Icons.more_vert),
-                subtitle: Text('${widget.dataMap[key]}'),
-                onTap: () {
-                  collection.containsItem(key)
-                      ? collection.removeItem(key)
-                      : collection.addItem(key);
-                }),
+              title: Text(
+                key,
+                style: widget.option == ListOptions.parcelList || widget.option == ListOptions.lostKeysList
+                  ? TextStyle(
+                  color: storedList.containsItem(key)
+                      ? Colors.grey[300]
+                      : Colors.black,
+                  decoration: storedList.containsItem(key)
+                      ? TextDecoration.lineThrough
+                      : null,
+                ) : null,
+              ),
+              trailing: Icon(Icons.more_vert),
+              subtitle: widget.option == ListOptions.parcelList || widget.option == ListOptions.lostKeysList 
+                ? Text('${widget.dataMap[key]}'):null,
+              onTap: () => widget.onTapTile(context, storedList, key),
+            ),
           );
         });
   }
