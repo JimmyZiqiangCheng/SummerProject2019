@@ -50,10 +50,10 @@ class MyDialog extends StatelessWidget {
                   // Header Color
                   color: Colors.transparent,
                 ),
-                padding: const EdgeInsets.all(16.0),
+                //padding: const EdgeInsets.only(left: 54.0),
                 alignment: Alignment.center,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -91,35 +91,35 @@ class MyDialog extends StatelessWidget {
                           )
                       ],
                     ),
-                    Text(
-                      title,
-                      textAlign: TextAlign.center,
-                      style: TextStyles.heading3Style,
-                    ),
-                    if (subTitle != null) ...[
-                      UIHelper.verticalSpaceSmall,
-                      Padding(
-                        padding: const EdgeInsets.only(left: 0.0),
-                        child: Text(
-                          subTitle,
-                          style: TextStyles.subHeaderStyle(
-                              color: Colors.grey[600]),
-                          textAlign: TextAlign.center,
-                        ),
-                      )
-                    ],
+                    Container(
+                      padding: const EdgeInsets.only(left: 56.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            style: TextStyles.heading4Style
+                          ),
+                          if (subTitle != null) ...[
+                            UIHelper.verticalSpaceSmall,
+                            Text(
+                              subTitle,
+                              style: TextStyles.subHeaderStyle(color: Colors.grey[600]),
+                              //textAlign: TextAlign.left,
+                            ),
+                        ],]
+                      ),
+                    )
                   ],
                 ),
               ),
-              UIHelper.horizontalLine(color: Colors.grey),
               Center(
                 child: Container(
-                  padding: EdgeInsets.all(
-                    UIHelper.horizontalMarginLarge,
-                  ),
+                  //padding: EdgeInsets.all(UIHelper.horizontalMarginMedium),
                   child: dialogBody,
                 ),
               ),
+              UIHelper.verticalSpaceMedium,
               if (customTextButton != null)
                 customTextButton
               else

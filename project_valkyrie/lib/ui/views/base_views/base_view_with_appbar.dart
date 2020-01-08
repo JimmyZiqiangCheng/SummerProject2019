@@ -64,13 +64,17 @@ class _BaseViewWithAppBarState<T extends ChangeNotifier> extends State<BaseViewW
   String getTitle(String routePath) {
     switch (routePath) {
       case RoutePaths.home:
-        return 'Home Sample';
+        return 'Home';
       case RoutePaths.parcel:
-        return 'Parcel Sample ';
+        return 'Parcel';
       case RoutePaths.calendar:
-        return 'Calendar Sample';
+        return 'Calendar';
       case RoutePaths.lostKeys:
-        return 'Lost Key Sample';
+        return 'Lost Keys';
+      case RoutePaths.maintenance:
+        return 'Maintenance';
+      case RoutePaths.rent:
+        return 'Rent';
       default:
         return 'Unknown';
     }

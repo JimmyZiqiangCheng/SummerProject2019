@@ -52,7 +52,8 @@ class _MyItemListState extends State<MyItemList> {
             child: ListTile(
               title: Text(
                 key,
-                style: widget.option == ListOptions.parcelList? TextStyle(
+                style: widget.option == ListOptions.parcelList || widget.option == ListOptions.lostKeysList
+                  ? TextStyle(
                   color: storedList.containsItem(key)
                       ? Colors.grey[300]
                       : Colors.black,
@@ -62,7 +63,7 @@ class _MyItemListState extends State<MyItemList> {
                 ) : null,
               ),
               trailing: Icon(Icons.more_vert),
-              subtitle: (widget.option == ListOptions.parcelList) || (widget.option == ListOptions.lostKeysList) 
+              subtitle: widget.option == ListOptions.parcelList || widget.option == ListOptions.lostKeysList 
                 ? Text('${widget.dataMap[key]}'):null,
               onTap: () => widget.onTapTile(context, storedList, key),
             ),

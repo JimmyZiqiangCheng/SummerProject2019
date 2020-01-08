@@ -6,6 +6,8 @@ class TextStyles {
   static const double _textHeadingSize1 = 64.0;
   static const double _textHeadingSize2 = 48.0;
   static const double _textHeadingSize3 = 32.0;
+  static const double _textHeadingSize4 = 24.0;
+
   static const double _textSize = 16.0;
   static const double _textTitleSize = 20.0;
   static const double _textSubtitleSize = 12.0;
@@ -41,6 +43,11 @@ class TextStyles {
     fontWeight: FontWeight.w500,
     color: AppColors.primaryDark,
     fontSize: _textHeadingSize3,
+  );
+
+  static const heading4Style = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: _textHeadingSize4,
   );
 
   static const titleStyle = TextStyle(

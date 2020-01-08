@@ -96,17 +96,16 @@ class SignUpForm extends StatelessWidget {
                 }
                 return null;
               },
-              hintText: 'Full name, please...',
+              hintText: 'John Doe',
               keyboradInputType: TextInputType.text,
               prefixIcon: AppIcons.textFieldPrefixIcon(Icons.person_pin),
             ),
             UIHelper.verticalSpaceMedium,
             Row(children: <Widget>[
               Container(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 2.0, horizontal: 10.0),
+                  padding: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
                   decoration: BoxDecoration(
-                    color: Colors.blueAccent,
+                    color: AppColors.primaryColor,
                     border: Border.all(width: 1.0, color: Colors.transparent),
                     borderRadius: BorderRadius.circular(16.0),
                   ),
@@ -145,7 +144,7 @@ class SignUpForm extends StatelessWidget {
                 }
                 return null;
               },
-              hintText: 'Email address, please...',
+              hintText: 'johndoe@abc.com',
               keyboradInputType: TextInputType.emailAddress,
               prefixIcon: AppIcons.textFieldPrefixIcon(Icons.email),
               suffix: RaisedButton(
@@ -177,7 +176,7 @@ class SignUpForm extends StatelessWidget {
                 }
                 return null;
               },
-              hintText: 'Verfication code, please...',
+              hintText: '0123',
               keyboradInputType: TextInputType.number,
               prefixIcon:
                   AppIcons.textFieldPrefixIcon(Icons.confirmation_number),

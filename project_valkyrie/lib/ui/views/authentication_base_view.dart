@@ -50,12 +50,15 @@ class _AuthenticationBaseViewState extends State<AuthenticationBaseView> {
                       ),
                     ),
                     UIHelper.verticalSpaceSmall,
-                    Text(
-                      widget.viewTitle,
-                      style: TextStyle(
+                    Container(
+                      padding: EdgeInsets.only(left:8.0, top:16.0),
+                      child: Text(
+                        widget.viewTitle,
+                        style: TextStyle(
+                          color: AppColors.primaryDark,
                           fontSize: 32.0,
-                          fontWeight: FontWeight.w600,
-                          fontStyle: FontStyle.italic,
+                          fontWeight: FontWeight.bold,
+                        )
                       ),
                     )
                   ],
@@ -68,8 +71,8 @@ class _AuthenticationBaseViewState extends State<AuthenticationBaseView> {
                   margin: const EdgeInsets.only(
                       top: UIHelper.verticalMarginMedium,
                       bottom: UIHelper.verticalMarginSmall,
-                      left: UIHelper.horizontalMarginSmall,
-                      right: UIHelper.horizontalMarginSmall),
+                      left: UIHelper.horizontalMarginMedium,
+                      right: UIHelper.horizontalMarginMedium),
                   child: widget.contentWidget,
                 ),
               )

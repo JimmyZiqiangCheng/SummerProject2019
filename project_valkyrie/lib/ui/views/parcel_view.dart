@@ -29,7 +29,7 @@ class ParcelView extends StatelessWidget {
         return MyDialog(
           title: key,
           subTitle: _dataMap[key],
-          dialogBody: generatQR('1928485'),
+          dialogBody: generatQR(key),
           customTextButton: null,
         //   enableTopRightIcon: true,
         //   topRightIconOnTap: () {
@@ -46,11 +46,24 @@ class ParcelView extends StatelessWidget {
   }
 
   Widget generatQR(String key) {
-    return QrImage(
-      data: key,
-      version: QrVersions.auto,
-      size: 240,
-      gapless: false,
+    return Column(
+      children: <Widget>[
+        //UIHelper.horizontalLine(color: Colors.grey),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey)
+          ),
+          margin: EdgeInsets.only(top: 48.0, bottom:48.0),
+          child: QrImage(
+            padding: EdgeInsets.all(16.0),
+            data: key,
+            version: QrVersions.auto,
+            size: 220,
+            gapless: false,
+          ),
+        ),
+        //UIHelper.horizontalLine(color: Colors.grey),
+      ],
     );
   }
 

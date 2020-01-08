@@ -34,12 +34,12 @@ class _PasswordTextField extends State<PasswordTextField> {
         ),
         prefixIcon: Icon(
           Icons.vpn_key,
-          size: 32.0,
+          size: 24.0,
         ),
         suffixIcon: IconButton(
           icon: Icon(
             Icons.remove_red_eye,
-            size: 26,
+            size: 24,
             color: this._obscureText ? AppColors.primary : AppColors.primaryDark,
           ),
           onPressed: () => this._toggle(),
