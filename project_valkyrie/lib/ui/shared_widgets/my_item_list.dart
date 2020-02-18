@@ -39,9 +39,9 @@ class _MyItemListState extends State<MyItemList> {
         itemCount: widget.dataMap.length,
         itemBuilder: (BuildContext context, int index) {
           // if it is events, it is not key value pair but a list
-          String key;
-          widget.option == ListOptions.eventList ? key = widget.dataMap[index]
-            :key = widget.dataMap.keys.elementAt(index);
+          String title;
+          widget.option == ListOptions.eventList ? title = widget.dataMap[index]
+            :title = widget.dataMap.keys.elementAt(index);
           
           return Container( 
             alignment: Alignment.topCenter,
@@ -51,21 +51,21 @@ class _MyItemListState extends State<MyItemList> {
             margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
             child: ListTile(
               title: Text(
-                key,
+                title,
                 style: widget.option == ListOptions.parcelList || widget.option == ListOptions.lostKeysList
                   ? TextStyle(
-                  color: storedList.containsItem(key)
+                  color: storedList.containsItem(title)
                       ? Colors.grey[300]
                       : Colors.black,
-                  decoration: storedList.containsItem(key)
+                  decoration: storedList.containsItem(title)
                       ? TextDecoration.lineThrough
                       : null,
                 ) : null,
               ),
               trailing: Icon(Icons.more_vert),
               subtitle: widget.option == ListOptions.parcelList || widget.option == ListOptions.lostKeysList 
-                ? Text('${widget.dataMap[key]}'):null,
-              onTap: () => widget.onTapTile(context, storedList, key),
+                ? Text('${widget.dataMap[title]}'):null,
+              onTap: () => widget.onTapTile(context, storedList, title),
             ),
           );
         });

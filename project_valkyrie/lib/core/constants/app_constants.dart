@@ -16,3 +16,9 @@ class ListOptions {
   static const int eventList = 2;
   static const int notificationList = 3;
 }
+
+class CustomTileOptions {
+  static const int date = 0;
+  static const int time = 1;
+  static const int description = 2;
+}
