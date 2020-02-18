@@ -20,16 +20,16 @@ class ParcelView extends StatelessWidget {
     'ADL000127': '2019.12.15 front desk',
   };
 
-  void onTapTile(BuildContext context, ItemListViewModel list, String key) {
-    print("Show dialog with Parcel Item on Tapped! $key");
-    //_showCustomDialog(context, key);
+  void onTapTile(BuildContext context, ItemListViewModel list, String title) {
+    print("Show dialog with Parcel Item on Tapped! $title");
+    //_showCustomDialog(context, title);
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return MyDialog(
-          title: key,
-          subTitle: _dataMap[key],
-          dialogBody: generatQR(key),
+          title: title,
+          subTitle: _dataMap[title],
+          dialogBody: generatQR(title),
           customTextButton: null,
         //   enableTopRightIcon: true,
         //   topRightIconOnTap: () {

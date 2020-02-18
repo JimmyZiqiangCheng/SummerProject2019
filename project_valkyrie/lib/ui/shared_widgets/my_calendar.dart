@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:project_valkyrie/core/view_models/item_list_view_model.dart';
+import 'package:project_valkyrie/ui/shared_widgets/my_dialog.dart';
+import 'package:project_valkyrie/ui/shared_widgets/my_tiles_combo.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:project_valkyrie/core/constants/app_constants.dart';
 import 'package:project_valkyrie/ui/shared_widgets/my_item_list.dart';
@@ -69,9 +72,35 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
       option: ListOptions.eventList,
       dataMap: _selectedEvents,
       additionalTopWidget: _buildTableCalendarWithBuilders(),
+      onTapTile: onTapTile,
     );
   }
 
+  void onTapTile(BuildContext context, ItemListViewModel list, String title){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return MyDialog(
+          title:title,
+          dialogBody: MyTilesCombo(),
+          customTextButton: FlatButton(
+            onPressed: (){},
+            child: Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.favorite_border
+                  ),
+                  Text('Interested')
+                ],
+              ),
+            ),
+          ),
+        );
+      }
+    );
+  }
   // More advanced TableCalendar configuration (using Builders & Styles)
   Widget _buildTableCalendarWithBuilders() {
     return TableCalendar(
