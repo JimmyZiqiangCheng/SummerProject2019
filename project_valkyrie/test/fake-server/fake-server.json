@@ -1,0 +1,31 @@
+{
+  "parcels":[
+    {
+      "id":1,
+      "trackingNumber": "track001",
+      "location": "parcel locker",
+      "collector": "whois",
+      "deliverTime": "2020-02-10T10:03:12.390539Z",
+      "pickupTime": "2020-02-10T10:30:12.390539Z",
+      "isPickedUp": 1
+    },
+    {
+      "id":2,
+      "trackingNumber": "track002",
+      "location": "parcel locker",
+      "collector": "whois",
+      "deliverTime": "2020-02-14T08:08:12.390539Z",
+      "pickupTime": "",
+      "isPickedUp": 0
+    },
+    {
+      "id":3,
+      "trackingNumber": "track001",
+      "location": "Front Desk",
+      "collector": "whois",
+      "deliverTime": "2020-02-19T02:03:12.390539Z",
+      "pickupTime": "",
+      "isPickedUp": 0
+    }
+  ]
+}
