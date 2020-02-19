@@ -11,6 +11,9 @@ class ParcelService {
   Future<List<Parcel>> getAllParcels() async {
     List<Parcel> parcels = new List<Parcel>();
     final response = await _api.get(_path);
+    if (response == null)
+      return parcels;
+      
     if (response.statusCode == 200) {
       Iterable body = json.decode(response.body);
       parcels = body.map((model) => Parcel.fromJson(model)).toList();
