@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project_valkyrie/core/view_models/item_list_view_model.dart';
 import 'package:project_valkyrie/ui/shared_widgets/my_dialog.dart';
 import 'package:project_valkyrie/ui/shared_widgets/my_tiles_combo.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -76,7 +75,7 @@ class CalendarState extends State<Calendar> with TickerProviderStateMixin{
     );
   }
 
-  void onTapTile(BuildContext context, ItemListViewModel list, String title){
+  void onTapTile(BuildContext context, String title){
     showDialog(
       context: context,
       builder: (BuildContext context) {
